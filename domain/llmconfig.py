@@ -5,6 +5,7 @@ from dataclasses import dataclass
 class LLMConfig:
     api_key: str
     model: str
+    folder_id: str | None = None
     base_url: str = 'https://openrouter.ai/api/v1/chat/completions'
     timeout: float = 10.0
     max_retries: int = 3

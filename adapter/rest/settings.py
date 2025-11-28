@@ -7,7 +7,8 @@ class Settings(BaseSettings):
     port: int
     host: str
     dev: bool
-    llm_api_key: str
+    api_key: str
+    folder_id: str
 
     class Config:
         env_file = '.env'
