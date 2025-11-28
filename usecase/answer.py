@@ -15,3 +15,6 @@ class AnswerUsecase:
 
     def edit(self, text: str, corrections: str) -> tuple[str, int]:
         return self._correcting.execute(text + corrections)
+
+    def get_type(self,):
+        pass
