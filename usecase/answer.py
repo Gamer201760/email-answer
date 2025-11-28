@@ -3,7 +3,9 @@ from usecase.interface import LLMProviderRepository
 
 class AnswerUsecase:
     def __init__(self, agent: LLMProviderRepository) -> None:
-        self._base_promt = ''
+        self._signature_template = (
+            ''  # Шаблон подписи, который всегда добавляется в конце
+        )
         self._agent = agent
 
     def answer(self, text: str) -> tuple[str, int]:
