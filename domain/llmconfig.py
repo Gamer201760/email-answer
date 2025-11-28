@@ -23,3 +23,7 @@ class LLMConfig:
 
     enable_safety_guardrails: bool = True
     security_prefix_prompt: str = ''
+
+    def with_base_promt(self, base_promt: str) -> 'LLMConfig':
+        self.system_prompt = base_promt
+        return self

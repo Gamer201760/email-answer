@@ -22,3 +22,7 @@ class OpenAILLMProvider:
             max_output_tokens=self._config.max_tokens,
         )
         return res.output_text, res.usage.total_tokens if res.usage else 0
+
+    def with_base_promt(self, base_promt: str) -> 'OpenAILLMProvider':
+        self._config.system_prompt = base_promt
+        return self

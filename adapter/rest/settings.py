@@ -14,6 +14,11 @@ def load_editing_prompt() -> str:
         return f.read().strip()
 
 
+def load_type_prompt() -> str:
+    with open('promt/get_type.txt') as f:
+        return f.read().strip()
+
+
 class Settings(BaseSettings):
     port: int
     host: str
@@ -23,6 +28,7 @@ class Settings(BaseSettings):
 
     base_prompt: str = Field(default_factory=load_base_prompt)
     editing_prompt: str = Field(default_factory=load_editing_prompt)
+    type_prompt: str = Field(default_factory=load_type_prompt)
 
     class Config:
         env_file = '.env'
