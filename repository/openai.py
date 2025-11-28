@@ -14,9 +14,6 @@ class OpenAILLMProvider:
         )
 
     def execute(self, text: str) -> tuple[str, int]:
-        """
-        text — уже подготовленный промпт (включая "системные" инструкции в тексте)
-        """
         res = self._client.responses.create(
             model=self._config.model,
             instructions=self._config.system_prompt,
@@ -25,4 +22,4 @@ class OpenAILLMProvider:
             top_p=self._config.top_p,
             max_output_tokens=self._config.max_tokens,
         )
-        return res.output_text, 10
+        return res.output_text, res.usage.total_tokens if res.usage else 0
