@@ -13,7 +13,7 @@ def create_answer(
     usecase: AnswerUsecase = Depends(get_answer_usecase),
 ) -> AnswerResponse:
     result = usecase.answer(payload.text)
-    return AnswerResponse(result=result)
+    return AnswerResponse(result=result[0], tokens=result[1])
 
 
 @router.post('/edit', response_model=AnswerResponse)
@@ -22,4 +22,4 @@ def edit_answer(
     usecase: AnswerUsecase = Depends(get_answer_usecase),
 ) -> AnswerResponse:
     result = usecase.edit(payload.text, payload.corrections)
-    return AnswerResponse(result=result)
+    return AnswerResponse(result=result[0], tokens=result[1])

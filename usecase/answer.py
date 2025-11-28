@@ -6,5 +6,8 @@ class AnswerUsecase:
         self._base_promt = ''
         self._agent = agent
 
-    def answer(self, text: str) -> str: ...
-    def edit(self, text: str, corrections: str) -> str: ...
+    def answer(self, text: str) -> tuple[str, int]:
+        return self._agent.execute(text)
+
+    def edit(self, text: str, corrections: str) -> tuple[str, int]:
+        return self._agent.execute(text + corrections)

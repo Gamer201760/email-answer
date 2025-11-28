@@ -12,3 +12,4 @@ class EditRequest(BaseModel):
 
 class AnswerResponse(BaseModel):
     result: str
+    tokens: int
