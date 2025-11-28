@@ -1,15 +1,12 @@
-import os
-
+# main.py
 import uvicorn
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from adapter.rest.handlers import router as answers_router
+from adapter.rest.settings import get_settings
 
-load_dotenv()
-
-DEV = bool(os.getenv('DEV', 'True'))
+settings = get_settings()
 
 app = FastAPI(
     title='Email answer',
@@ -30,12 +27,12 @@ app.include_router(
 )
 
 
-def main():
+def main() -> None:
     uvicorn.run(
         'main:app',
-        host=os.getenv('HOST', 'localhost'),
-        port=int(os.getenv('PORT', '8000')),
-        reload=DEV,
+        host=settings.host,
+        port=settings.port,
+        reload=settings.dev,
     )
 
 
