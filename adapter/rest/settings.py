@@ -1,14 +1,12 @@
 from functools import lru_cache
 
-from fastapi import Path
 from pydantic import Field
 from pydantic_settings import BaseSettings
 
-BASE_PROMPT_PATH = Path('promt/system.txt')
-
 
 def load_base_prompt() -> str:
-    return BASE_PROMPT_PATH.read_text(encoding='utf-8')
+    with open('promt/system.txt') as f:
+        return f.read().strip()
 
 
 class Settings(BaseSettings):
