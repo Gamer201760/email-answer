@@ -6,7 +6,6 @@ from domain.llmconfig import LLMConfig
 class OpenAILLMProvider:
     def __init__(self, config: LLMConfig) -> None:
         self._config = config
-        self._config.__class__
         self._client = OpenAI(
             base_url=self._config.base_url,
             api_key=self._config.api_key,
