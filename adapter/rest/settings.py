@@ -9,6 +9,11 @@ def load_base_prompt() -> str:
         return f.read().strip()
 
 
+def load_editing_prompt() -> str:
+    with open('promt/grinding.txt') as f:
+        return f.read().strip()
+
+
 class Settings(BaseSettings):
     port: int
     host: str
@@ -17,6 +22,7 @@ class Settings(BaseSettings):
     folder_id: str
 
     base_prompt: str = Field(default_factory=load_base_prompt)
+    editing_prompt: str = Field(default_factory=load_editing_prompt)
 
     class Config:
         env_file = '.env'

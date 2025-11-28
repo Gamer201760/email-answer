@@ -25,7 +25,16 @@ def get_llm_provider(
     return OpenAILLMProvider(config=config)
 
 
+def get_correcting_provider(
+    config: LLMConfig = Depends(get_llm_config),
+    settings: Settings = Depends(get_settings),
+) -> LLMProviderRepository:
+    config.system_prompt = settings.editing_prompt
+    return OpenAILLMProvider(config=config)
+
+
 def get_answer_usecase(
     agent: LLMProviderRepository = Depends(get_llm_provider),
+    correcting: LLMProviderRepository = Depends(get_correcting_provider),
 ) -> AnswerUsecase:
-    return AnswerUsecase(agent=agent)
+    return AnswerUsecase(agent=agent, correcting=correcting)
