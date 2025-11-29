@@ -48,7 +48,7 @@ class AnswerUsecase:
         )
         if res.output_parsed:
             emails = []
-            for i in range(res.output_parsed.importance):
+            for i in range(res.output_parsed.importance + 1):
                 emails.extend(self._email_policy[res.output_parsed.depertament][str(i)])
             return AnswerResponse(
                 result=res.output_parsed.result,
