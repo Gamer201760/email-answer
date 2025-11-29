@@ -1,5 +1,5 @@
 from usecase.interface import LLMProviderRepository
-from rag import get_context
+from rag.rag import get_context
 
 class AnswerUsecase:
     def __init__(
