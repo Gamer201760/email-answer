@@ -21,5 +21,6 @@ class AnswerUsecase:
         return AnswerResponse(
             result=res.output_text,
             tokens=res.usage.total_tokens if res.usage else 0,
-            reply_to=['azamat201760@ya.ru'],
+            reply_to=["azamat201760@ya.ru"],
         )
+
