@@ -1,0 +1,157 @@
+{
+    "Engineering": {
+        "0": [
+            "junior.dev1@company.example",
+            "junior.dev2@company.example"
+        ],
+        "1": [
+            "middle.dev1@company.example",
+            "middle.dev2@company.example"
+        ],
+        "2": [
+            "senior.dev1@company.example",
+            "senior.dev2@company.example"
+        ],
+        "3": [
+            "lead.dev1@company.example"
+        ],
+        "4": [],
+        "5": [],
+        "6": [],
+        "7": [],
+        "8": [],
+        "9": [
+            "head.engineering@company.example"
+        ],
+        "10": [
+            "ceo@company.example"
+        ]
+    },
+    "Product": {
+        "0": [
+            "product.assistant1@company.example"
+        ],
+        "1": [
+            "product.analyst1@company.example"
+        ],
+        "2": [
+            "product.manager1@company.example"
+        ],
+        "3": [
+            "senior.pm1@company.example"
+        ],
+        "4": [],
+        "5": [],
+        "6": [],
+        "7": [],
+        "8": [],
+        "9": [
+            "head.product@company.example"
+        ],
+        "10": [
+            "ceo@company.example"
+        ]
+    },
+    "Sales": {
+        "0": [
+            "sales.rep1@company.example",
+            "sales.rep2@company.example"
+        ],
+        "1": [
+            "sales.rep3@company.example"
+        ],
+        "2": [
+            "sales.manager1@company.example"
+        ],
+        "3": [
+            "key.account1@company.example"
+        ],
+        "4": [],
+        "5": [],
+        "6": [],
+        "7": [],
+        "8": [],
+        "9": [
+            "head.sales@company.example"
+        ],
+        "10": [
+            "ceo@company.example"
+        ]
+    },
+    "Marketing": {
+        "0": [
+            "marketing.assistant1@company.example"
+        ],
+        "1": [
+            "marketing.specialist1@company.example"
+        ],
+        "2": [
+            "marketing.specialist2@company.example"
+        ],
+        "3": [
+            "senior.marketer1@company.example"
+        ],
+        "4": [],
+        "5": [],
+        "6": [],
+        "7": [],
+        "8": [],
+        "9": [
+            "head.marketing@company.example"
+        ],
+        "10": [
+            "ceo@company.example"
+        ]
+    },
+    "HR": {
+        "0": [
+            "hr.assistant1@company.example"
+        ],
+        "1": [
+            "recruiter1@company.example"
+        ],
+        "2": [
+            "recruiter2@company.example"
+        ],
+        "3": [
+            "senior.hr@company.example"
+        ],
+        "4": [],
+        "5": [],
+        "6": [],
+        "7": [],
+        "8": [],
+        "9": [
+            "head.hr@company.example"
+        ],
+        "10": [
+            "ceo@company.example"
+        ]
+    },
+    "Finance": {
+        "0": [
+            "accountant1@company.example",
+            "accountant2@company.example"
+        ],
+        "1": [
+            "junior.accountant1@company.example"
+        ],
+        "2": [
+            "financial.analyst1@company.example"
+        ],
+        "3": [
+            "senior.fin.analyst1@company.example"
+        ],
+        "4": [],
+        "5": [],
+        "6": [],
+        "7": [],
+        "8": [],
+        "9": [
+            "cfo@company.example"
+        ],
+        "10": [
+            "ceo@company.example"
+        ]
+    }
+}

@@ -11,18 +11,18 @@ from usecase.answer import AnswerUsecase
 from usecase.edit import EditUsecase
 from usecase.get_type import GetTypeUsecase
 
-router = APIRouter(prefix='/answers', tags=['answers'])
+router = APIRouter(prefix="/answers", tags=["answers"])
 
 
-@router.post('/', response_model=AnswerResponse)
+@router.post("/", response_model=AnswerResponse)
 def create_answer(
     payload: AnswerRequest,
     usecase: AnswerUsecase = Depends(get_answer_usecase),
-) -> AnswerResponse:
+) -> AnswerResponse | None:
     return usecase.execute(payload.text)
 
 
-@router.post('/edit', response_model=EditResponse)
+@router.post("/edit", response_model=EditResponse)
 def edit_answer(
     payload: EditRequest,
     usecase: EditUsecase = Depends(get_edit_usecase),
@@ -30,7 +30,7 @@ def edit_answer(
     return usecase.execute(payload.text + payload.corrections)
 
 
-@router.post('/type', response_model=TypeResponse)
+@router.post("/type", response_model=TypeResponse)
 def get_type(
     payload: TypeRequest,
     usecase: GetTypeUsecase = Depends(get_type_usecase),

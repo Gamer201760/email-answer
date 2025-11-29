@@ -1,0 +1,9 @@
+{
+    "information": 86400,
+    "complaint": 43200,
+    "regulatory": 21600,
+    "partnership": 172800,
+    "approval": 86400,
+    "notification": 259200,
+    "spam": 0
+}
