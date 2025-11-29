@@ -1,12 +1,10 @@
-from datetime import timedelta
-
 from openai import BaseModel
 
 
 class TypeResponse(BaseModel):
     letter_type: str
     importance: int
-    sla: timedelta
+    sla: int
 
 
 class EditResponse(BaseModel):

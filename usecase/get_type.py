@@ -30,5 +30,5 @@ class GetTypeUsecase:
             return TypeResponse(
                 letter_type=res.output_parsed.letter_type,
                 importance=res.output_parsed.importance,
-                sla=timedelta(days=1),
+                sla=int(timedelta(days=1).total_seconds()),
             )
