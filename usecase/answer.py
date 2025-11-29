@@ -12,21 +12,30 @@ class LAnswer(BaseModel):
 
 
 class AnswerUsecase:
-    def __init__(self, agent: OpenAI, config: LLMConfig) -> None:
+    def __init__(
+        self,
+        agent: OpenAI,
+        config: LLMConfig,
+        email_policy: dict[str, dict[str, list[str]]],
+    ) -> None:
         self._client = agent
         self._config = config
+        self._email_policy = email_policy
         self._session = Session()
 
     def execute(self, text: str) -> AnswerResponse | None:
-        response = self._session.post(
-            "http://localhost:8123/query", json={"query": text, "top_k": 3}
-        )
-        if response.status_code != 200:
+        try:
+            response = self._session.post(
+                "http://localhost:8123/query", json={"query": text, "top_k": 3}
+            )
+            if response.status_code != 200:
+                context = ""
+            else:
+                context = response.json()["context"]
+        except Exception:
             context = ""
-        else:
-            context = response.json()["context"]
 
-        dobavka = '\nЕще определи что это за департамент: Finance HR Marketing Sales Product Engineering и важность этого письма от 0 до 10, формат ответа {"result": текст ответа, "depertament": департамент, "importance": важность [0, 10]}'
+        dobavka = '\nЕще определи что это за департамент: Finance HR Marketing Sales Product Engineering и важность этого письма от 0 до 10, СТРОГО ФОРМАТ ОТВЕТА {"result": текст ответа, "depertament": департамент, "importance": важность [0, 10]}'
 
         res = self._client.responses.parse(
             text_format=LAnswer,
@@ -38,9 +47,11 @@ class AnswerUsecase:
             max_output_tokens=self._config.max_tokens,
         )
         if res.output_parsed:
-            print(res.output_parsed.depertament, res.output_parsed.importance)
+            emails = []
+            for i in range(res.output_parsed.importance):
+                emails.extend(self._email_policy[res.output_parsed.depertament][str(i)])
             return AnswerResponse(
                 result=res.output_parsed.result,
                 tokens=res.usage.total_tokens if res.usage else 0,
-                reply_to=["azamat201760@ya.ru"],
+                reply_to=emails,
             )

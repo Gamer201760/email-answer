@@ -35,7 +35,9 @@ def get_answer_usecase(
     config: LLMConfig = Depends(get_llm_config),
     settings: Settings = Depends(get_settings),
 ) -> AnswerUsecase:
-    return AnswerUsecase(agent, config.with_base_promt(settings.base_prompt))
+    return AnswerUsecase(
+        agent, config.with_base_promt(settings.base_prompt), settings.email_policy
+    )
 
 
 def get_edit_usecase(

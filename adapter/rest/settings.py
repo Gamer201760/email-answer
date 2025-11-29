@@ -25,6 +25,11 @@ def load_sla_policy() -> dict[str, int]:
         return json.load(f)
 
 
+def load_email_policy() -> dict[str, dict[str, list[str]]]:
+    with open("policy/emails.json") as f:
+        return json.load(f)
+
+
 class Settings(BaseSettings):
     port: int
     host: str
@@ -37,6 +42,9 @@ class Settings(BaseSettings):
     type_prompt: str = Field(default_factory=load_type_prompt)
 
     sla_policy: dict[str, int] = Field(default_factory=load_sla_policy)
+    email_policy: dict[str, dict[str, list[str]]] = Field(
+        default_factory=load_email_policy
+    )
 
     class Config:
         env_file = ".env"
