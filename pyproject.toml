@@ -1,68 +1,27 @@
 [project]
-name = "email-answer"
-version = "0.0.1"
-description = "Простой ии-ангент, который отвечает на сообщения"
-readme = "README.md"
-requires-python = ">=3.13"
+name = "bank-rag-api"
+version = "0.1.0"
 dependencies = [
+    # Из paste.txt (RAG)
+    "pypdf2>=3.0.1",
+    "pytest>=8.4.2",
+    "python-docx>=1.2.0",
+    "rank-bm25>=0.2.2",
+    "scikit-learn>=1.7.2",
+    # Из paste-2.txt (API)
     "fastapi>=0.122.0",
     "openai>=2.8.1",
     "pydantic-settings>=2.12.0",
     "python-dotenv>=1.2.1",
     "requests>=2.32.5",
     "uvicorn>=0.38.0",
+    "haystack-ai>=2.20.0",
+    "elasticsearch>=9.2.0",
+    "tenacity==9.1.2",
 ]
 
-[dependency-groups]
-dev = [
+[tool.uv]
+dev-dependencies = [
     "mypy>=1.18.2",
-    "pytest>=8.4.2",
     "ruff>=0.13.3",
 ]
-
-[tool.pytest.ini_options]
-log_cli = true
-log_cli_level = "debug"
-
-[tool.ruff]
-exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".git-rewrite",
-    ".hg",
-    ".ipynb_checkpoints",
-    ".mypy_cache",
-    ".nox",
-    ".pants.d",
-    ".pyenv",
-    ".pytest_cache",
-    ".pytype",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    ".vscode",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "dist",
-    "node_modules",
-    "site-packages",
-    "venv",
-    "gen",
-]
-
-
-[tool.ruff.lint]
-select = ["F", "N", "I", "E", "W", "PL"]
-ignore = ["W191", "E501", "PLR2004", "PLR0913"]
-[tool.ruff.lint.extend-per-file-ignores]
-"adapter/grpc/**/*.py" = ["N802"]
-
-[tool.ruff.format]
-exclude = ["list"]
-quote-style = "single"
-
