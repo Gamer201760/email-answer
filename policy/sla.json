@@ -1,0 +1,30 @@
+[
+    {
+        "name": "information",
+        "sla": 86400
+    },
+    {
+        "name": "complaint",
+        "sla": 43200
+    },
+    {
+        "name": "regulatory",
+        "sla": 21600
+    },
+    {
+        "name": "partnership",
+        "sla": 172800
+    },
+    {
+        "name": "approval",
+        "sla": 86400
+    },
+    {
+        "name": "notification",
+        "sla": 259200
+    },
+    {
+        "name": "spam",
+        "sla": 0
+    }
+]
