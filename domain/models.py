@@ -4,8 +4,8 @@ from openai import BaseModel
 
 
 class TypeResponse(BaseModel):
-    email_type: str
-    important: int
+    letter_type: str
+    importance: int
     sla: timedelta
 
 

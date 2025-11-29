@@ -9,9 +9,8 @@ class EditUsecase:
         self._client = agent
         self._config = config
 
-    def execute(self, text: str) -> EditResponse | None:
-        res = self._client.responses.parse(
-            text_format=EditResponse,
+    def execute(self, text: str) -> EditResponse:
+        res = self._client.responses.create(
             model=self._config.model,
             instructions=self._config.system_prompt,
             input=text,
@@ -19,4 +18,7 @@ class EditUsecase:
             top_p=self._config.top_p,
             max_output_tokens=self._config.max_tokens,
         )
-        return res.output_parsed
+        return EditResponse(
+            result=res.output_text,
+            tokens=res.usage.total_tokens if res.usage else 0,
+        )

@@ -18,7 +18,7 @@ router = APIRouter(prefix='/answers', tags=['answers'])
 def create_answer(
     payload: AnswerRequest,
     usecase: AnswerUsecase = Depends(get_answer_usecase),
-) -> AnswerResponse | None:
+) -> AnswerResponse:
     return usecase.execute(payload.text)
 
 
@@ -26,7 +26,7 @@ def create_answer(
 def edit_answer(
     payload: EditRequest,
     usecase: EditUsecase = Depends(get_edit_usecase),
-) -> EditResponse | None:
+) -> EditResponse:
     return usecase.execute(payload.text + payload.corrections)
 
 
