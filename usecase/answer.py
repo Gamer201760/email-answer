@@ -1,13 +1,22 @@
-from usecase.interface import LLMProviderRepository
+from openai import OpenAI
+
+from domain.llmconfig import LLMConfig
+from domain.models import AnswerResponse
 
 
 class AnswerUsecase:
-    def __init__(
-        self,
-        agent: LLMProviderRepository,
-        system_promt: str,
-    ) -> None:
-        self._agent = agent.with_base_promt(system_promt)
+    def __init__(self, agent: OpenAI, config: LLMConfig) -> None:
+        self._client = agent
+        self._config = config
 
-    def execute(self, text: str) -> tuple[str, int]:
-        return self._agent.execute(text)
+    def execute(self, text: str) -> AnswerResponse | None:
+        res = self._client.responses.parse(
+            text_format=AnswerResponse,
+            model=self._config.model,
+            instructions=self._config.system_prompt,
+            input=text,
+            temperature=self._config.temperature,
+            top_p=self._config.top_p,
+            max_output_tokens=self._config.max_tokens,
+        )
+        return res.output_parsed

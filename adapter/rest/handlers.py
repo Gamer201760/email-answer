@@ -5,11 +5,9 @@ from fastapi import APIRouter, Depends
 from adapter.rest.di import get_answer_usecase, get_edit_usecase, get_type_usecase
 from adapter.rest.models import (
     AnswerRequest,
-    AnswerResponse,
     EditRequest,
-    EditResponse,
-    TypeResponse,
 )
+from domain.models import AnswerResponse, EditResponse, TypeResponse
 from usecase.answer import AnswerUsecase
 
 router = APIRouter(prefix='/answers', tags=['answers'])
