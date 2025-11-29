@@ -1,10 +1,11 @@
 from fastapi import Depends
+from openai import OpenAI
 
 from adapter.rest.settings import Settings, get_settings
 from domain.llmconfig import LLMConfig
-from repository.openai import OpenAILLMProvider
 from usecase.answer import AnswerUsecase
-from usecase.interface import LLMProviderRepository
+from usecase.edit import EditUsecase
+from usecase.get_type import GetTypeUsecase
 
 
 def get_llm_config(
@@ -19,27 +20,35 @@ def get_llm_config(
     )
 
 
-def get_llm_provider(
+def get_openai(
     config: LLMConfig = Depends(get_llm_config),
-) -> LLMProviderRepository:
-    return OpenAILLMProvider(config=config)
+) -> OpenAI:
+    return OpenAI(
+        base_url=config.base_url,
+        api_key=config.api_key,
+        project=config.folder_id,
+    )
 
 
 def get_answer_usecase(
-    agent: LLMProviderRepository = Depends(get_llm_provider),
+    agent: OpenAI = Depends(get_openai),
+    config: LLMConfig = Depends(get_llm_config),
+    settings: Settings = Depends(get_settings),
 ) -> AnswerUsecase:
-    return AnswerUsecase(agent=agent)
+    return AnswerUsecase(agent, config.with_base_promt(settings.base_prompt))
 
 
 def get_edit_usecase(
-    agent: LLMProviderRepository = Depends(get_llm_provider),
+    agent: OpenAI = Depends(get_openai),
+    config: LLMConfig = Depends(get_llm_config),
     settings: Settings = Depends(get_settings),
-) -> AnswerUsecase:
-    return AnswerUsecase(agent=agent.with_base_promt(settings.editing_prompt))
+) -> EditUsecase:
+    return EditUsecase(agent, config.with_base_promt(settings.editing_prompt))
 
 
 def get_type_usecase(
-    agent: LLMProviderRepository = Depends(get_llm_provider),
+    agent: OpenAI = Depends(get_openai),
+    config: LLMConfig = Depends(get_llm_config),
     settings: Settings = Depends(get_settings),
-) -> AnswerUsecase:
-    return AnswerUsecase(agent=agent.with_base_promt(settings.type_prompt))
+) -> GetTypeUsecase:
+    return GetTypeUsecase(agent, config.with_base_promt(settings.type_prompt))

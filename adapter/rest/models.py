@@ -9,3 +9,7 @@ class AnswerRequest(BaseModel):
 class EditRequest(BaseModel):
     text: str
     corrections: str
+
+
+class TypeRequest(BaseModel):
+    text: str

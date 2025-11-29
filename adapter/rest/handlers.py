@@ -1,14 +1,15 @@
-from datetime import timedelta
-
 from fastapi import APIRouter, Depends
 
 from adapter.rest.di import get_answer_usecase, get_edit_usecase, get_type_usecase
 from adapter.rest.models import (
     AnswerRequest,
     EditRequest,
+    TypeRequest,
 )
 from domain.models import AnswerResponse, EditResponse, TypeResponse
 from usecase.answer import AnswerUsecase
+from usecase.edit import EditUsecase
+from usecase.get_type import GetTypeUsecase
 
 router = APIRouter(prefix='/answers', tags=['answers'])
 
@@ -17,25 +18,21 @@ router = APIRouter(prefix='/answers', tags=['answers'])
 def create_answer(
     payload: AnswerRequest,
     usecase: AnswerUsecase = Depends(get_answer_usecase),
-) -> AnswerResponse:
-    result = usecase.execute(payload.text)
-    return AnswerResponse(
-        result=result[0], tokens=result[1], reply_to=[]
-    )  # TODO: получать из usecase
+) -> AnswerResponse | None:
+    return usecase.execute(payload.text)
 
 
 @router.post('/edit', response_model=EditResponse)
 def edit_answer(
     payload: EditRequest,
-    usecase: AnswerUsecase = Depends(get_edit_usecase),
-) -> EditResponse:
-    result = usecase.execute(payload.text + payload.corrections)
-    return EditResponse(result=result[0], tokens=result[1])
+    usecase: EditUsecase = Depends(get_edit_usecase),
+) -> EditResponse | None:
+    return usecase.execute(payload.text + payload.corrections)
 
 
 @router.post('/type', response_model=TypeResponse)
 def get_type(
-    payload: EditRequest,
-    usecase: AnswerUsecase = Depends(get_type_usecase),
-) -> TypeResponse:
-    return TypeResponse(email_type='Info', sla=timedelta(days=2), important=1)
+    payload: TypeRequest,
+    usecase: GetTypeUsecase = Depends(get_type_usecase),
+) -> TypeResponse | None:
+    return usecase.execute(payload.text)
