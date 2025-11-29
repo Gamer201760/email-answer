@@ -1,5 +1,3 @@
-from datetime import timedelta
-
 from openai import BaseModel, OpenAI
 
 from domain.llmconfig import LLMConfig
@@ -12,9 +10,12 @@ class LType(BaseModel):
 
 
 class GetTypeUsecase:
-    def __init__(self, agent: OpenAI, config: LLMConfig) -> None:
+    def __init__(
+        self, agent: OpenAI, config: LLMConfig, sla_policy: dict[str, int]
+    ) -> None:
         self._client = agent
         self._config = config
+        self._sla_policy = sla_policy
 
     def execute(self, text: str) -> TypeResponse | None:
         res = self._client.responses.parse(
@@ -30,5 +31,5 @@ class GetTypeUsecase:
             return TypeResponse(
                 letter_type=res.output_parsed.letter_type,
                 importance=res.output_parsed.importance,
-                sla=int(timedelta(days=1).total_seconds()),
+                sla=self._sla_policy.get(res.output_parsed.letter_type, 0),
             )

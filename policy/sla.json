@@ -1,30 +1,9 @@
-[
-    {
-        "name": "information",
-        "sla": 86400
-    },
-    {
-        "name": "complaint",
-        "sla": 43200
-    },
-    {
-        "name": "regulatory",
-        "sla": 21600
-    },
-    {
-        "name": "partnership",
-        "sla": 172800
-    },
-    {
-        "name": "approval",
-        "sla": 86400
-    },
-    {
-        "name": "notification",
-        "sla": 259200
-    },
-    {
-        "name": "spam",
-        "sla": 0
-    }
-]
+{
+    "information": 86400,
+    "complaint": 43200,
+    "regulatory": 21600,
+    "partnership": 172800,
+    "approval": 86400,
+    "notification": 259200,
+    "spam": 0
+}

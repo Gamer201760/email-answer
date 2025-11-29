@@ -54,5 +54,7 @@ def get_type_usecase(
     settings: Settings = Depends(get_settings),
 ) -> GetTypeUsecase:
     return GetTypeUsecase(
-        agent, config.with_base_promt(settings.base_prompt + settings.type_prompt)
+        agent,
+        config.with_base_promt(settings.base_prompt + settings.type_prompt),
+        settings.sla_policy,
     )
