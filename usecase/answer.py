@@ -13,9 +13,9 @@ class AnswerUsecase:
 
     def execute(self, text: str) -> AnswerResponse:
         response = self._session.post(
-            "localhost:8123/query", data={"query": text, "top_k": 3}
+            "http://localhost:8123/query", json={"query": text, "top_k": 3}
         )
-
+        print(response.text)
         res = self._client.responses.create(
             model=self._config.model,
             instructions=self._config.system_prompt,
