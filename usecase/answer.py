@@ -1,4 +1,5 @@
 from openai import OpenAI
+from requests import Session
 
 from domain.llmconfig import LLMConfig
 from domain.models import AnswerResponse
@@ -8,12 +9,17 @@ class AnswerUsecase:
     def __init__(self, agent: OpenAI, config: LLMConfig) -> None:
         self._client = agent
         self._config = config
+        self._session = Session()
 
     def execute(self, text: str) -> AnswerResponse:
+        response = self._session.post(
+            "localhost:8123/query", data={"query": text, "top_k": 3}
+        )
+
         res = self._client.responses.create(
             model=self._config.model,
             instructions=self._config.system_prompt,
-            input=text,
+            input=response.json()["context"] + text,
             temperature=self._config.temperature,
             top_p=self._config.top_p,
             max_output_tokens=self._config.max_tokens,
