@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 class AnswerRequest(BaseModel):
     text: str
+    email_type: str
 
 
 class EditRequest(BaseModel):
@@ -10,6 +11,5 @@ class EditRequest(BaseModel):
     corrections: str
 
 
-class AnswerResponse(BaseModel):
-    result: str
-    tokens: int
+class TypeRequest(BaseModel):
+    text: str
