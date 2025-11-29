@@ -1,17 +1,17 @@
 from openai import OpenAI
 
 from domain.llmconfig import LLMConfig
-from domain.models import AnswerResponse
+from domain.models import EditResponse
 
 
-class AnswerUsecase:
+class EditUsecase:
     def __init__(self, agent: OpenAI, config: LLMConfig) -> None:
         self._client = agent
         self._config = config
 
-    def execute(self, text: str) -> AnswerResponse | None:
+    def execute(self, text: str) -> EditResponse | None:
         res = self._client.responses.parse(
-            text_format=AnswerResponse,
+            text_format=EditResponse,
             model=self._config.model,
             instructions=self._config.system_prompt,
             input=text,

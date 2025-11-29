@@ -12,8 +12,8 @@ class OpenAILLMProvider:
             project=self._config.folder_id,
         )
 
-    def execute(self, text: str) -> tuple[str, int]:
-        res = self._client.responses.create(
+    def execute[T](self, text: str) -> T:
+        res = self._client.responses.parse(
             model=self._config.model,
             instructions=self._config.system_prompt,
             input=text,
